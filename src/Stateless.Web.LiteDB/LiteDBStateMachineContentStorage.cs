@@ -15,15 +15,13 @@
 
         public Stream Load(StateMachineContext context, string key, Stream stream)
         {
-            using (var db = new LiteDatabase(this.connectionString))
+            using var db = new LiteDatabase(this.connectionString);
+            if (db.FileStorage.Exists($"{context.Id}/{key}"))
             {
-                if (db.FileStorage.Exists($"{context.Id}/{key}"))
-                {
-                    var fileInfo = db.FileStorage.Download($"{context.Id}/{key}", stream);
-                }
-
-                return stream;
+                var fileInfo = db.FileStorage.Download($"{context.Id}/{key}", stream);
             }
+
+            return stream;
         }
 
         public void Save(StateMachineContext context, string key, Stream stream, string contentType)

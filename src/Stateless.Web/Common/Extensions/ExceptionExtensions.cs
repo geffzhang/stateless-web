@@ -14,8 +14,8 @@
             }
 
             return source?.InnerException == null
-                 ? $"[{source.GetType().Name}] {source?.Message}".Replace(Environment.NewLine, Environment.NewLine + " ")
-                 : $"[{source.GetType().Name}] {source.Message}  --> {source.InnerException.GetFullMessage()}".Replace(Environment.NewLine, Environment.NewLine + " ");
+                 ? $"[{source.GetType().Name}] {source?.Message}".Replace(Environment.NewLine, Environment.NewLine + " ", StringComparison.CurrentCultureIgnoreCase)
+                 : $"[{source.GetType().Name}] {source.Message}  --> {source.InnerException.GetFullMessage()}".Replace(Environment.NewLine, Environment.NewLine + " ", StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

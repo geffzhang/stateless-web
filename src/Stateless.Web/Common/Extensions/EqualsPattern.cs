@@ -1,5 +1,6 @@
 ﻿namespace Stateless.Web
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text.RegularExpressions;
@@ -29,7 +30,7 @@
                 return false;
             }
 
-            var regexp = Regex.Escape(value).Replace("\\*", ".*");
+            var regexp = Regex.Escape(value).Replace("\\*", ".*", StringComparison.CurrentCultureIgnoreCase);
 
             return Regex.IsMatch(source, "^" + (ignoreCase ? "(?i)" : string.Empty) + regexp + "$");
         }
